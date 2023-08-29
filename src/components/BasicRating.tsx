@@ -3,10 +3,12 @@ import Rating from "@mui/material/Rating";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-type Props = {};
+type Props = {
+    rating: number;
+};
 
 const BasicRating = (props: Props) => {
-    const [rating, setRating] = useState<number | null>(0);
+    const [rating, setRating] = useState<number | null>(props.rating);
     return (
         <Box
             sx={{

@@ -1,50 +1,23 @@
 import React, { useState } from "react";
-import Filter from "./components/Filter";
-import Results from "./components/Results";
-import BasicRating from "./components/BasicRating";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import { MuiDrawer } from "./components/MuiDrawer";
-import FilterAltIcon from "@mui/icons-material/FilterAlt";
-import { IconButton } from "@mui/material";
-
+import { About, Pricing, Support, Platforms, Home } from './pages'
 type Props = {};
 
 const App = (props: Props) => {
-    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     return (
-        <div className="w-full h-full flex">
+        <div className="w-full h-full flex flex-col">
+            <BrowserRouter>
             <Navbar />
-
-            <div className="mt-[80px] flex flex-1">
-                <Filter className="md:flex" />
-
-                <MuiDrawer
-                    isDrawerOpen={isDrawerOpen}
-                    setIsDrawerOpen={setIsDrawerOpen}
-                />
-                <div className="p-6 flex gap-6 flex-col w-full">
-                    <div className="w-full flex">
-                        <div className="flex md:hidden">
-                            <IconButton
-                                size="large"
-                                edge="start"
-                                color="inherit"
-                                aria-label="logo"
-                                onClick={() => setIsDrawerOpen(true)}
-                            >
-                                <FilterAltIcon />
-                            </IconButton>
-                        </div>
-                        <input
-                            type="text"
-                            placeholder="Search"
-                            className="flex-1 p-2"
-                        />
-                    </div>
-                    <Results />
-                </div>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/pricing" element={<Pricing />} />
+                <Route path="/support" element={<Support />} />
+                <Route path="/platforms" element={<Platforms />} />
+            </Routes>
+            </BrowserRouter>
             </div>
-        </div>
     );
 };
 

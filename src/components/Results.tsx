@@ -1,41 +1,21 @@
 import React, { useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import BasicRating from "./BasicRating";
 
-type Props = {};
-
-const data = [
-    {
-        id: 1,
-        name: "Yogges klinik",
-        address: "Lantmannagatan 59D",
-        city: "Malmö",
-        zip: "214 48",
-    },
-    {
-        id: 2,
-        name: "Dental clinic",
-        address: "Drakegatan 10",
-        city: "Göteborg",
-        zip: "412 50",
-    },
-    {
-        id: 3,
-        name: "Fotmassage Stockholm",
-        address: "Hjulsta Backar 12D",
-        city: "Stockholm",
-        zip: "163 65",
-    },
-];
+type Props = {
+    data: Array[any];
+};
 
 type ResultCardProps = {
     name: string;
     address: string;
     city: string;
     zip: string;
+    rating: number;
 };
 
-const ResultCard = ({ name, address, city, zip }: ResultCardProps) => {
+const ResultCard = ({ name, address, city, zip, rating }: ResultCardProps) => {
     const [isExpanded, setIsExpanded] = useState(false);
     return (
         <div
@@ -66,6 +46,7 @@ const ResultCard = ({ name, address, city, zip }: ResultCardProps) => {
                         </div>
                     )}
                 </div>
+                <div><BasicRating rating={rating} /></div>
                 {isExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
             </div>
         </div>
@@ -75,13 +56,14 @@ const ResultCard = ({ name, address, city, zip }: ResultCardProps) => {
 const Results = (props: Props) => {
     return (
         <div className="bg-white-200 flex-1 h-full gap-6 flex flex-col">
-            {data.map((item) => (
+            {props.data.map((item) => (
                 <ResultCard
                     key={item.id}
                     name={item.name}
                     address={item.address}
                     city={item.city}
                     zip={item.zip}
+                    rating={item.rating}
                 />
             ))}
         </div>
